@@ -1,0 +1,15 @@
+meta {
+  name: view all products
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{URL}}/api/v1/products
+  body: none
+  auth: none
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiNjU3ZDg5YjZjNjc3ZDg1ZGRjZTBmYTEzIiwicm9sZSI6WyJhZG1pbiJdfSwiaWF0IjoxNzAyNzg5NDU4LCJleHAiOjE3MDI3OTMwNTh9.QoIdYaojUUcBsXxdowlEgWOiiBOrhUBClmK7SCo7CCE
+}

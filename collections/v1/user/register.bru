@@ -1,0 +1,21 @@
+meta {
+  name: register
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{URL}}/api/v1/auth/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username":"test3",
+    "password":"123456789",
+    "email":"test3@gmail.com",
+    "address":"test hcm",
+    "phone": 1234214123
+  }
+}
