@@ -44,7 +44,7 @@ export const getProductDetail = async (req, res) => {
     const { id } = req.params;
     const Products = await Product.findById(id);
     if (!Products) return res.json({ message: 'Product is not existed!!' });
-    return res.status(200).json(Products);
+    return res.status(200).json({ data: Products });
   } catch (error) {
     console.error(error);
     res.status(400).send('Bad Request');
@@ -53,22 +53,33 @@ export const getProductDetail = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   const { productName, description, price, quantity, categoryId } = req.body;
-  const img = req.file.path;
+
+  const productImgs = req.files;
+  const uploadedImages = [];
+
   try {
     const category = await Category.findById(categoryId);
-    const uploadImage = await cloudinary.uploader.upload(img, { folder: 'products' });
-    console.log('upload img>>>>>>', uploadImage);
-    if (uploadImage) {
-      const newProduct = await Product.create({
-        productName: productName,
-        description: description,
-        img: uploadImage.public_id,
-        price: price,
-        quantity: quantity,
-        category: category,
-      });
-      return res.status(200).json(newProduct);
+
+    if (productImgs) {
+      const uploadImage = async (path) =>
+        await cloudinary.uploader.upload(path, { folder: 'products' });
+
+      for (const img of productImgs) {
+        const { path } = img;
+        const result = await uploadImage(path);
+        uploadedImages.push(result);
+      }
     }
+
+    // const newProduct = await Product.create({
+    //   productName: productName,
+    //   description: description,
+    //   productImgs: uploadedImages,
+    //   price: price,
+    //   quantity: quantity,
+    //   category: category,
+    // });
+    // return res.status(200).json({ data: newProduct });
   } catch (error) {
     console.error(error);
     res.status(400).send('Bad Request');

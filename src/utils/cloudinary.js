@@ -5,15 +5,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { format } from 'date-fns';
 import 'dotenv/config';
 
+const MAX_LIMIT = 2 * 1024 * 1024;
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET,
 });
+
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     format: 'jpeg',
+    folder: 'carousels',
     resource_type: 'image',
     public_id: (req, file) => {
       const timeStamp = format(new Date(), 'yyyy-MM-dd-HHmmss');
@@ -22,10 +26,12 @@ const storage = new CloudinaryStorage({
     },
   },
 });
-export const upload = multer({ storage: storage });
-export const deleteImage = async (file) => {
+
+export const uploadCarousel = multer({ storage: storage });
+export const upload = multer({ storage: storage, limits: { fileSize: MAX_LIMIT } });
+export const deleteImage = async (files) => {
   try {
-    const result = await cloudinary.uploader.destroy(file);
+    const result = await cloudinary.uploader.destroy(files);
     return result;
   } catch (error) {
     console.error(error);

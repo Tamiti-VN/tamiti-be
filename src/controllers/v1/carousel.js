@@ -1,5 +1,6 @@
 import { Carousel } from '../../models/carousel.js';
 import { v2 as cloudinary } from 'cloudinary';
+import { deleteImage } from '../../utils/cloudinary.js';
 
 export const getCarouselList = async (req, res) => {
   try {
@@ -16,29 +17,25 @@ export const getCarouselList = async (req, res) => {
 };
 
 export const addCarousel = async (req, res) => {
-  const imgs = req.files;
-  const uploadedImages = [];
-
   try {
-    if (imgs) {
-      const uploadImage = async (path) =>
-        await cloudinary.uploader.upload(path, { folder: 'carousels' });
+    const images = req.files;
+    const carouselList = [];
 
-      for (const img of imgs) {
-        const { path } = img;
-        const result = await uploadImage(path);
-        const carousel = await Carousel.create({
-          imgPath: result.public_id,
-        });
-
-        uploadedImages.push(carousel);
-      }
-
-      return res.status(201).json({ message: 'Images upload successfully', data: uploadedImages });
+    if (!images || images.length == 0) {
+      return res.status(400).json({ message: 'Please upload at least 1 image' });
     }
-    return res.status(400).json({ message: 'Please upload at least 1 image' });
+
+    for (const image of images) {
+      const carousel = await Carousel.create({
+        fileName: image.filename,
+      });
+      carouselList.push(carousel);
+    }
+
+    return res.status(201).json({ message: 'Images upload successfully', data: carouselList });
   } catch (error) {
     console.error(error);
+    deleteImage(req.files);
     res.status(400).send('Bad Request');
   }
 };

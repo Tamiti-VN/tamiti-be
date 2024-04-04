@@ -4,9 +4,9 @@ const productSchema = new Schema(
   {
     productName: { type: String, require: true },
     description: { type: String, require: true },
-    img: { type: String },
-    price: { type: Number, require: true },
-    quantity: { type: Number, default: 0 },
+    productImgs: { type: Array },
+    // price: { type: Number, require: true },
+    // quantity: { type: Number, default: 0 },
     category: [{ type: Types.ObjectId, ref: 'Category' }],
   },
   { timestamps: true }

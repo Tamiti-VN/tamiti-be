@@ -19,7 +19,12 @@ productRoutes.get('/:id', getProductDetail);
 
 //Protected route
 // productRoutes.use(upload.single('img'));
-productRoutes.post('/', isAllowedRoleMiddleware('admin', 'staff'), createProduct);
+productRoutes.post(
+  '/',
+  upload.array('imgs', 5),
+  isAllowedRoleMiddleware('admin', 'staff'),
+  createProduct
+);
 productRoutes.patch('/:id', isAllowedRoleMiddleware('admin', 'staff'), updateProduct);
 productRoutes.delete('/:id', isAllowedRoleMiddleware('admin'), deleteProduct);
 export { productRoutes };
