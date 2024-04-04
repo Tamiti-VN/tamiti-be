@@ -54,32 +54,38 @@ export const getProductDetail = async (req, res) => {
 export const createProduct = async (req, res) => {
   const { productName, description, price, quantity, categoryId } = req.body;
 
-  const productImgs = req.files;
-  const uploadedImages = [];
-
   try {
-    const category = await Category.findById(categoryId);
+    const images = req.files;
+    const productImageList = [];
+    console.log(req.files);
 
-    if (productImgs) {
-      const uploadImage = async (path) =>
-        await cloudinary.uploader.upload(path, { folder: 'products' });
-
-      for (const img of productImgs) {
-        const { path } = img;
-        const result = await uploadImage(path);
-        uploadedImages.push(result);
-      }
+    if (!images || images.length == 0) {
+      return res.status(400).json({ message: 'Please upload at least 1 image' });
     }
+    const category = await Category.findById(categoryId);
+    // if (images) {
+    //   const uploadImage = async (path) =>
+    //     await cloudinary.uploader.upload(path, { folder: 'products' });
 
-    // const newProduct = await Product.create({
-    //   productName: productName,
-    //   description: description,
-    //   productImgs: uploadedImages,
-    //   price: price,
-    //   quantity: quantity,
-    //   category: category,
-    // });
-    // return res.status(200).json({ data: newProduct });
+    //   for (const img of productImgs) {
+    //     const { path } = img;
+    //     const result = await uploadImage(path);
+    //     productImageList.push(result);
+    //   }
+    // }
+
+    for (const image of images) {
+      productImageList.push(image.filename);
+    }
+    const newProduct = await Product.create({
+      productName: productName,
+      description: description,
+      productImgs: productImageList,
+      price: price,
+      quantity: quantity,
+      category: category,
+    });
+    return res.status(200).json({ data: newProduct });
   } catch (error) {
     console.error(error);
     res.status(400).send('Bad Request');

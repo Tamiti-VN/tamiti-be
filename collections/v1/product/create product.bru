@@ -7,7 +7,15 @@ meta {
 post {
   url: {{URL}}/api/v1/products
   body: json
-  auth: none
+  auth: bearer
+}
+
+headers {
+  Cookie: {{access_token}}
+}
+
+auth:bearer {
+  token: 
 }
 
 body:json {

@@ -13,7 +13,7 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
-const storage = new CloudinaryStorage({
+const storageForCarousel = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     format: 'jpeg',
@@ -26,9 +26,22 @@ const storage = new CloudinaryStorage({
     },
   },
 });
+const storageForProduct = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    format: 'jpeg',
+    folder: 'products',
+    resource_type: 'image',
+    public_id: (req, file) => {
+      const timeStamp = format(new Date(), 'yyyy-MM-dd-HHmmss');
+      const uniqueIdentifier = uuidv4();
+      return `${uniqueIdentifier}_${timeStamp}`;
+    },
+  },
+});
+export const uploadCarousel = multer({ storage: storageForCarousel });
+export const uploadProductImage = multer({ storage: storageForProduct });
 
-export const uploadCarousel = multer({ storage: storage });
-export const upload = multer({ storage: storage, limits: { fileSize: MAX_LIMIT } });
 export const deleteImage = async (files) => {
   try {
     const result = await cloudinary.uploader.destroy(files);

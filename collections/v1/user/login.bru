@@ -12,7 +12,11 @@ post {
 
 body:json {
   {
-    "username": "admin",
+    "email": "admin@gmail.com",
     "password": "admin123"
   }
+}
+
+vars:post-response {
+  access_token: res.body.token
 }

@@ -26,7 +26,7 @@ export const login = async (req, res) => {
     res.cookie('token', access_token, {
       httpOnly: true,
       // secure: process.env.NODE_ENV === 'production' ? true : false,
-      secure: true,
+      secure: false,
       sameSite: 'none',
     });
 
