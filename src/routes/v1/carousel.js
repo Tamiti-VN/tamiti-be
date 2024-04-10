@@ -1,5 +1,5 @@
 import express from 'express';
-import { addCarousel, getCarouselList } from '../../controllers/v1/carousel.js';
+import { addCarousel, getCarouselList } from '../../controllers/v1/carousel.controller.js';
 import { isAllowedRoleMiddleware } from '../../middlewares/authMiddleware.js';
 import { uploadCarousel } from '../../utils/cloudinary.js';
 

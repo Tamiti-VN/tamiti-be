@@ -1,5 +1,4 @@
 import { Carousel } from '../../models/carousel.js';
-import { v2 as cloudinary } from 'cloudinary';
 import { deleteImage } from '../../utils/cloudinary.js';
 
 export const getCarouselList = async (req, res) => {

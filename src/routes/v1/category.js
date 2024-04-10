@@ -4,7 +4,7 @@ import {
   deleteCategory,
   getCategories,
   updateCategory,
-} from '../../controllers/v1/category.js';
+} from '../../controllers/v1/category.controller.js';
 import { isAllowedRoleMiddleware } from '../../middlewares/authMiddleware.js';
 
 const categoryRoutes = express.Router();

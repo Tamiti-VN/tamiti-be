@@ -6,7 +6,7 @@ import {
   deleteProduct,
   getProductDetail,
   getAllProductsWithPage,
-} from '../../controllers/v1/product.js';
+} from '../../controllers/v1/product.controller.js';
 import { isAllowedRoleMiddleware } from '../../middlewares/authMiddleware.js';
 import { uploadProductImage } from '../../utils/cloudinary.js';
 

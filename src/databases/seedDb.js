@@ -1,10 +1,8 @@
-import { hashPassword } from '../../utils/authUtil.js';
-import { User } from '../user.js';
-import { DBConnect } from './DBConnect.js';
+import { hashPassword } from '../utils/authUtil.js';
+import { User } from '../models/user.js';
+import './DBConnect.js';
 const seedDatabase = async () => {
   try {
-    await DBConnect();
-
     await seedAdmin();
     await seedStaff();
     await seedUsers();
@@ -59,7 +57,7 @@ const seedStaff = async () => {
 };
 const seedUsers = async () => {
   try {
-    const user = await User.findOne({ username: 'test' });
+    const user = await User.findOne({ username: 'user' });
 
     if (!user) {
       await User.create({

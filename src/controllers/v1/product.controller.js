@@ -1,7 +1,7 @@
 import { Category } from '../../models/category.js';
 import { Product } from '../../models/product.js';
 import { deleteImage } from '../../utils/cloudinary.js';
-import { v2 as cloudinary } from 'cloudinary';
+
 export const getAllProducts = async (req, res) => {
   try {
     const Products = await Product.find().populate('category', 'categoryName');

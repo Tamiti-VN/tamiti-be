@@ -6,7 +6,7 @@ import {
   register,
   updateUser,
   userList,
-} from '../../controllers/v1/user.js';
+} from '../../controllers/v1/user.controller.js';
 import { isAllowedRoleMiddleware, authMiddleware } from '../../middlewares/authMiddleware.js';
 
 const authRoutes = express.Router();
