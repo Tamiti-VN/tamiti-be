@@ -4,8 +4,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
 import 'dotenv/config';
+import { api } from './routes/index.js';
 
-import { routes } from './routes/v1/index.js';
 import compression from 'compression';
 
 export const app = express();
@@ -28,4 +28,4 @@ app.use(json());
 
 import './databases/DBConnect.js';
 
-app.use('/api/v1', routes);
+app.use('/api', api);

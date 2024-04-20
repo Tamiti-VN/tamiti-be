@@ -9,4 +9,4 @@ router.use('/auth', authRoutes);
 router.use('/products', productRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/carousels', carouselRoutes);
-export { router as routes };
+export { router as routesV1 };

@@ -63,7 +63,7 @@ const seedUsers = async () => {
       await User.create({
         username: 'user',
         email: 'user@gmail.com',
-        password: await hashPassword('test123'), // You should hash the password in a real application
+        password: await hashPassword('user123'), // You should hash the password in a real application
         roles: ['user'],
       });
 

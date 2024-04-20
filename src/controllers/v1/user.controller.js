@@ -25,8 +25,6 @@ export const login = async (req, res) => {
 
     res.cookie('token', access_token, {
       httpOnly: true,
-      // secure: process.env.NODE_ENV === 'production' ? true : false,
-      secure: false,
       sameSite: 'none',
     });
 
@@ -42,7 +40,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error.' });
+    res.status(400).json({ message: 'Bad Request' });
   }
 };
 
@@ -80,17 +78,17 @@ export const register = async (req, res) => {
     return res.status(200).json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error.' });
+    res.status(400).json({ message: 'Bad Request' });
   }
 };
 
 export const logOut = async (req, res) => {
   try {
-    res.clearCookie();
+    res.clearCookie('token');
     res.status(200).json('LogOut successful!');
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error.' });
+    res.status(400).json({ message: 'Bad Request' });
   }
 };
 
@@ -101,7 +99,7 @@ export const updateUser = async (req, res) => {
 
     const updatedUser = {
       username: username,
-      password: password,
+      password: await hashPassword(password),
       address: address,
       phone: phone,
     };
@@ -115,7 +113,7 @@ export const updateUser = async (req, res) => {
     return res.status(200).json(result);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error.' });
+    res.status(400).json({ message: 'Bad Request' });
   }
 };
 
@@ -127,7 +125,7 @@ export const deleteUser = async (req, res) => {
     return res.status(200).json({ message: 'Delete Success', data: user });
   } catch (error) {
     console.error(error);
-    res.status(400).send('Bad Request');
+    res.status(400).json({ message: 'Bad Request' });
   }
 };
 
@@ -138,6 +136,6 @@ export const userList = async (req, res) => {
     return res.status(200).json(users);
   } catch (error) {
     console.error(error);
-    res.status(400).send('Bad Request');
+    res.status(400).json({ message: 'Bad Request' });
   }
 };
