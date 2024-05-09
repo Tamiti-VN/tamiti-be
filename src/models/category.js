@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const categorySchema = new Schema(
   {
@@ -7,4 +7,4 @@ const categorySchema = new Schema(
   { timestamps: true }
 );
 
-export const Category = model('Category', categorySchema);
+export const Category = model("Category", categorySchema);

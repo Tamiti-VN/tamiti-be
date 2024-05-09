@@ -1,4 +1,4 @@
-import { Schema, Types, model } from 'mongoose';
+import { Schema, Types, model } from "mongoose";
 
 const cartSchema = new Schema(
   {
@@ -13,4 +13,4 @@ const cartSchema = new Schema(
   { timestamps: true }
 );
 
-export const Cart = model('Cart', cartSchema);
+export const Cart = model("Cart", cartSchema);

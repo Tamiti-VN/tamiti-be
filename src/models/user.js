@@ -1,9 +1,9 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const userSchema = new Schema(
   {
     username: { type: String, require: true, trim: true, unique: true },
-    password: { type: String, require: true, select: false, trim: true, minlength: 6 },
+    password: { type: String, require: true, trim: true, minlength: 6 },
     email: { type: String, trim: true, unique: true },
     phone: { type: Number, trim: true },
     address: { type: String, trim: true },
@@ -11,10 +11,10 @@ const userSchema = new Schema(
       type: [
         {
           type: String,
-          enum: ['user', 'admin', 'staff'],
+          enum: ["user", "admin", "staff"],
         },
       ],
-      default: ['user'],
+      default: ["user"],
     },
   },
   { timestamps: true }
@@ -22,8 +22,8 @@ const userSchema = new Schema(
 
 userSchema.methods.toJSON = function () {
   const user = this.toObject();
-  delete user.password;
+  user.password = undefined;
   return user;
 };
 
-export const User = model('User', userSchema);
+export const User = model("User", userSchema);

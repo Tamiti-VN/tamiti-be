@@ -1,9 +1,9 @@
-import { v2 as cloudinary } from 'cloudinary';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
-import multer from 'multer';
-import { v4 as uuidv4 } from 'uuid';
-import { format } from 'date-fns';
-import 'dotenv/config';
+import { v2 as cloudinary } from "cloudinary";
+import { format } from "date-fns";
+import "dotenv/config";
+import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import { v4 as uuidv4 } from "uuid";
 
 const MAX_LIMIT = 2 * 1024 * 1024;
 
@@ -16,11 +16,11 @@ cloudinary.config({
 const storageForCarousel = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    format: 'jpeg',
-    folder: 'carousels',
-    resource_type: 'image',
+    format: "jpeg",
+    folder: "carousels",
+    resource_type: "image",
     public_id: (req, file) => {
-      const timeStamp = format(new Date(), 'yyyy-MM-dd-HHmmss');
+      const timeStamp = format(new Date(), "yyyy-MM-dd-HHmmss");
       const uniqueIdentifier = uuidv4();
       return `${uniqueIdentifier}_${timeStamp}`;
     },
@@ -29,11 +29,11 @@ const storageForCarousel = new CloudinaryStorage({
 const storageForProduct = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    format: 'jpeg',
-    folder: 'products',
-    resource_type: 'image',
+    format: "jpeg",
+    folder: "products",
+    resource_type: "image",
     public_id: (req, file) => {
-      const timeStamp = format(new Date(), 'yyyy-MM-dd-HHmmss');
+      const timeStamp = format(new Date(), "yyyy-MM-dd-HHmmss");
       const uniqueIdentifier = uuidv4();
       return `${uniqueIdentifier}_${timeStamp}`;
     },

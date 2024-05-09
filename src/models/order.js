@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const orderSchema = new Schema(
   {
@@ -11,9 +11,9 @@ const orderSchema = new Schema(
     ],
     amount: { type: Number, require: true },
     address: { type: String, require: true },
-    status: { type: String, default: 'pending' },
+    status: { type: String, default: "pending" },
   },
   { timestamps: true }
 );
 
-export const Oder = model('Oder', orderSchema);
+export const Oder = model("Oder", orderSchema);
