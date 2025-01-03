@@ -2,11 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from './users/entities/user.entity';
 import { PassportModule } from '@nestjs/passport';
-import { Session } from './utils/typeorm';
+
+import { User } from './users/entities/user.entity';
+import { Session } from './auth/entities/session.entity';
 
 const envFilePath =
   process.env.NODE_ENV === 'production'
