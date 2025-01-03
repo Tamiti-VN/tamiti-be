@@ -7,6 +7,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './users/entities/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { Session } from './utils/typeorm';
+import { ProductsModule } from './products/products.module';
+import { Product } from './products/entities/product.entity';
+import { ProductPrice } from './products/entities/product.price.entity';
+import { ProductCategory } from './products/entities/product.category.entity';
 
 const envFilePath =
   process.env.NODE_ENV === 'production'
@@ -29,10 +33,11 @@ const envFilePath =
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASS'),
         database: configService.get('DATABASE_NAME'),
-        entities: [User, Session],
+        entities: [User, Session, Product, ProductPrice, ProductCategory],
         synchronize: true,
       }),
     }),
+    ProductsModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
