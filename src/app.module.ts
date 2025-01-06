@@ -6,6 +6,11 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
+import { ProductsModule } from './products/products.module';
+import { Product } from './products/entities/product.entity';
+import { ProductPrice } from './products/entities/product-price.entity';
+import { ProductCategory } from './products/entities/product-category.entity';
+import { Category } from './products/entities/category.entity';
 
 import { User } from './users/entities/user.entity';
 import { Session } from './auth/entities/session.entity';
@@ -31,10 +36,14 @@ const envFilePath =
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASS'),
         database: configService.get('DATABASE_NAME'),
-        entities: [User, Session],
+        entities: [
+          User, Session,
+          Product, ProductPrice, ProductCategory, Category
+        ],
         synchronize: true,
       }),
     }),
+    ProductsModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
