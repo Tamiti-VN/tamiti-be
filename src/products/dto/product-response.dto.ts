@@ -1,4 +1,5 @@
-export class CreateProductDto {
+export class ProductResponseDto {
+  id: number;
   name: string;
   description: string;
   image: string;

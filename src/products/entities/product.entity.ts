@@ -1,6 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ProductPrice } from "./product.price.entity";
-import { ProductCategory } from "./product.category.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ProductPrice } from "./product-price.entity";
+import { ProductCategory } from "./product-category.entity";
 
 @Entity({ name: 'products' })
 export class Product {
@@ -15,18 +15,19 @@ export class Product {
   @Column()
   description: string;
 
-  @Column()
-  image: string;
+  @Column({ nullable: true })
+  image?: string;
 
   @OneToMany(
     () => ProductPrice,
     (productPrice) => productPrice.product
   )
-  productPrices: ProductPrice[];
+  prices: ProductPrice[];
 
   @OneToMany(
     () => ProductCategory,
-    (productCategory) => productCategory.product
+    (productCategory) => productCategory.product,
+    { nullable: true }
   )
   productCategories: ProductCategory[];
 }

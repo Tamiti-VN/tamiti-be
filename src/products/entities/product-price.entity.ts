@@ -1,22 +1,22 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from "./product.entity";
 
-@Entity({ name: 'product_categories' })
-export class ProductCategory {
-  // id, productId, name, description
+@Entity({ name: 'product_prices' })
+export class ProductPrice {
+  // id, productId, size, price
   // Todo Here!
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  size: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true })
+  price: number;
 
   @ManyToOne(
     () => Product,
-    (product) => product.productCategories
+    (product) => product.prices
   )
   product: Product;
 }
