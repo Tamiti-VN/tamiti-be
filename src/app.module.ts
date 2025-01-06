@@ -6,7 +6,6 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
-import { Session } from './utils/typeorm';
 import { ProductsModule } from './products/products.module';
 import { Product } from './products/entities/product.entity';
 import { ProductPrice } from './products/entities/product-price.entity';
