@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from './users/entities/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { Session } from './utils/typeorm';
 import { ProductsModule } from './products/products.module';
@@ -12,6 +12,9 @@ import { Product } from './products/entities/product.entity';
 import { ProductPrice } from './products/entities/product-price.entity';
 import { ProductCategory } from './products/entities/product-category.entity';
 import { Category } from './products/entities/category.entity';
+
+import { User } from './users/entities/user.entity';
+import { Session } from './auth/entities/session.entity';
 
 const envFilePath =
   process.env.NODE_ENV === 'production'

@@ -9,11 +9,11 @@ import { hashPassword } from 'src/utils/helper';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(User) private readonly usersRepository: Repository<User>,
   ) {}
   async create(createUserDto: CreateUserDto) {
-    const newUser = this.userRepository.create(createUserDto);
-    return await this.userRepository.save(newUser);
+    const newUser = this.usersRepository.create(createUserDto);
+    return await this.usersRepository.save(newUser);
   }
 
   findAll() {
@@ -21,11 +21,11 @@ export class UsersService {
   }
 
   findByEmail(email: string) {
-    return this.userRepository.findOne({ where: { email } });
+    return this.usersRepository.findOne({ where: { email } });
   }
 
   findOne(id: number) {
-    return this.userRepository.findOne({ where: { id } });
+    return this.usersRepository.findOne({ where: { id } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
